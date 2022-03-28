@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         textTheme: myTextTheme,
       ),
-      home: const RestaurantPage(),
+      home: const SplashScreen(),
     );
   }
 }
