@@ -9,7 +9,7 @@ class RestaurantPage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: greyColor,
-          title: const Text('Restaurant List'),
+          title: const Text('GoResto'),
           titleTextStyle: Theme.of(context).textTheme.headline5,
         ),
         backgroundColor: greyColor,

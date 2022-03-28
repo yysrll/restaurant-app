@@ -59,36 +59,52 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
+                      Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          width: MediaQuery.of(context).size.width - 124,
+                          decoration: const BoxDecoration(
+                              color: successTransparentColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              const Icon(
-                                MdiIcons.mapMarker,
-                                color: primaryColor,
-                                size: 24,
+                              Column(
+                                children: [
+                                  const Icon(
+                                    MdiIcons.mapMarker,
+                                    color: primaryColor,
+                                    size: 24,
+                                  ),
+                                  Text(
+                                    widget.restaurant.city,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2
+                                        ?.copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                widget.restaurant.city,
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              const Icon(
-                                MdiIcons.star,
-                                color: primaryLightColor,
-                                size: 24,
-                              ),
-                              Text(
-                                widget.restaurant.rating.toString(),
-                                style: Theme.of(context).textTheme.bodyText2,
+                              Column(
+                                children: [
+                                  const Icon(
+                                    MdiIcons.star,
+                                    color: primaryLightColor,
+                                    size: 24,
+                                  ),
+                                  Text(
+                                    widget.restaurant.rating.toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2
+                                        ?.copyWith(fontWeight: FontWeight.bold),
+                                  )
+                                ],
                               )
                             ],
-                          )
-                        ],
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 16,
