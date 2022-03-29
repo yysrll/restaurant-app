@@ -127,7 +127,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                   text: isFullDescription
                                       ? '...Show Less'
                                       : '...Show More',
-                                  style: TextStyle(color: dangerColor),
+                                  style: const TextStyle(color: dangerColor),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       isFullDescription = !isFullDescription;

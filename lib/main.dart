@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/utils/AppColor.dart';
-import 'package:restaurant_app/utils/TextTheme.dart';
+import 'package:restaurant_app/utils/app_color.dart';
+import 'package:restaurant_app/utils/text_theme.dart';
 import 'package:restaurant_app/views/pages/pages.dart';
 
 void main() {
