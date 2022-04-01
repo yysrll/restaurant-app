@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:restaurant_app/models/menu.dart';
+import 'package:restaurant_app/data/models/menu.dart';
 
 class Restaurant {
   late String id;
