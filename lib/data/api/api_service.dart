@@ -1,0 +1,33 @@
+import 'dart:convert';
+
+import 'package:restaurant_app/data/models/restaurant.dart';
+import 'package:http/http.dart' as http;
+import 'package:restaurant_app/data/models/restaurant_detail.dart';
+
+class ApiService {
+  static const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
+  
+  Future<List<Restaurant>> getRestaurants() async {
+    final response = await http.get(Uri.parse(_baseUrl + 'list'));
+
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body);
+
+      return (result['restaurants'] as Iterable).map((e) => Restaurant.fromJson(e)).toList();
+    } else {
+      throw Exception('Failed to load resturant, try again!');
+    }
+  }
+
+  Future<RestaurantDetail> getRestaurantDetail(String id) async {
+    final response = await http.get(Uri.parse(_baseUrl + 'detail/' + id));
+
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body);
+
+      return RestaurantDetail.fromJson(result['restaurant']);
+    } else {
+      throw Exception('Failed to load resturant, try again!');
+    }
+  }
+}

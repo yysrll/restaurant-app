@@ -1,7 +1,7 @@
 part of 'pages.dart';
 
-class RestaurantPage extends StatelessWidget {
-  const RestaurantPage({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +25,10 @@ class RestaurantPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: FutureBuilder<String>(
-                future: DefaultAssetBundle.of(context)
-                    .loadString('assets/restaurant.json'),
-                builder: (context, snapshot) {
-                  final List<Restaurant> restaurants =
-                      parseRestaurant(snapshot.data);
-                  return ListView.builder(
-                      itemCount: restaurants.length,
-                      itemBuilder: (context, index) {
-                        return RestaurantTile(restaurant: restaurants[index]);
-                      });
-                },
-              ),
+              child: ChangeNotifierProvider<RestaurantProvider>(
+                create: (_) => RestaurantProvider(apiService: ApiService()),
+                child: const RestaurantListItem(),
+              )
             )
           ],
         ));

@@ -8,7 +8,7 @@ class MenuItemTile extends StatelessWidget {
       required this.backgroundColor})
       : super(key: key);
 
-  final MenuItem item;
+  final Item item;
   final Color textColor;
   final Color backgroundColor;
 

@@ -1,9 +1,9 @@
-class MenuItem {
+class Item {
   late String name;
 
-  MenuItem({required this.name});
+  Item({required this.name});
 
-  factory MenuItem.fromJson(Map<String, dynamic> json) => MenuItem(
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
         name: json["name"],
       );
 

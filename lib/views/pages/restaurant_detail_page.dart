@@ -1,10 +1,9 @@
 part of 'pages.dart';
 
 class RestaurantDetailPage extends StatefulWidget {
-  const RestaurantDetailPage({Key? key, required this.restaurant})
-      : super(key: key);
+  const RestaurantDetailPage({Key? key, required this.id}) : super(key: key);
 
-  final Restaurant restaurant;
+  final String id;
 
   @override
   State<RestaurantDetailPage> createState() => _RestaurantDetailPageState();
@@ -17,28 +16,43 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
 
   @override
   void initState() {
-    if (widget.restaurant.description.length > 200) {
-      firstHalf = widget.restaurant.description.substring(0, 200);
-      secondHalf = widget.restaurant.description
-          .substring(200, widget.restaurant.description.length);
+    super.initState();
+  }
+
+  void _setDescription(String description) {
+    if (description.length > 200) {
+      firstHalf = description.substring(0, 200);
+      secondHalf = description.substring(200, description.length);
     } else {
-      firstHalf = widget.restaurant.description;
+      firstHalf = description;
       secondHalf = "";
     }
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
+    return ChangeNotifierProvider(
+        create: (_) =>
+            RestaurantDetailProvider(apiService: ApiService(), id: widget.id),
+        child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: greyColor,
+          ),
           backgroundColor: greyColor,
-          title: Text(widget.restaurant.name),
-          titleTextStyle: Theme.of(context).textTheme.headline5,
-        ),
-        backgroundColor: greyColor,
-        body: ListView(
+          body: _getDetail(context),
+        ));
+  }
+
+  Widget _getDetail(BuildContext context) {
+    return Consumer<RestaurantDetailProvider>(builder: (context, state, _) {
+      if (state.state == ResultState.loading) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else if (state.state == ResultState.hasData) {
+        _setDescription(state.result.description);
+        return ListView(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
@@ -47,9 +61,10 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Hero(
-                  tag: widget.restaurant.pictureId,
+                  tag: state.result.pictureId,
                   child: Image.network(
-                    widget.restaurant.pictureId,
+                    'https://restaurant-api.dicoding.dev/images/small/' +
+                        state.result.pictureId,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,
                   ),
@@ -59,6 +74,41 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        state.result.name,
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                      Text(
+                        state.result.address,
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                      SizedBox(
+                        height: 20,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: state.result.categories.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                alignment: Alignment.center,
+                                margin: const EdgeInsets.only(right: 8),
+                                decoration: BoxDecoration(
+                                    color: successTransparentColor,
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text(
+                                    state.result.categories[index].name,
+                                    style: Theme.of(context).textTheme.labelMedium?.copyWith(color: successColor),
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       Center(
                         child: Container(
                           padding: const EdgeInsets.all(16),
@@ -78,7 +128,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                     size: 24,
                                   ),
                                   Text(
-                                    widget.restaurant.city,
+                                    state.result.city,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText2
@@ -94,7 +144,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                     size: 24,
                                   ),
                                   Text(
-                                    widget.restaurant.rating.toString(),
+                                    state.result.rating.toString(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText2
@@ -164,10 +214,10 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),
-                      itemCount: widget.restaurant.menu.drinks.length,
+                      itemCount: state.result.menus.drinks.length,
                       itemBuilder: (context, index) {
                         return MenuItemTile(
-                            item: widget.restaurant.menu.drinks[index],
+                            item: state.result.menus.drinks[index],
                             textColor: primaryDarkColor,
                             backgroundColor: primaryDarkTransparentColor);
                       }),
@@ -191,10 +241,10 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),
-                      itemCount: widget.restaurant.menu.foods.length,
+                      itemCount: state.result.menus.foods.length,
                       itemBuilder: (context, index) {
                         return MenuItemTile(
-                            item: widget.restaurant.menu.foods[index],
+                            item: state.result.menus.foods[index],
                             textColor: successColor,
                             backgroundColor: successTransparentColor);
                       }),
@@ -202,6 +252,12 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
               ],
             ),
           ],
-        ));
+        );
+      } else if (state.state == ResultState.noData) {
+        return Center(child: Text(state.message));
+      } else {
+        return Center(child: Text(state.message));
+      }
+    });
   }
 }
