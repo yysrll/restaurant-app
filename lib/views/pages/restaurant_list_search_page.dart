@@ -11,7 +11,9 @@ class _RestaurantListSearchItemState extends State<RestaurantListSearchItem> {
   @override
   Widget build(BuildContext context) {
     return Consumer<RestaurantSearchProvider>(builder: (context, state, _) {
-      if (state.state == ResultState.loading) {
+      if (state.state == ResultState.initial) {
+        return const Center(child: Text('Find your favorite restaurant'));
+      } else if (state.state == ResultState.loading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.state == ResultState.hasData) {
         return ListView.builder(

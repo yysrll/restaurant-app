@@ -58,12 +58,15 @@ class _SearchPageState extends State<SearchPage> {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 32, bottom: 16, left: 16, right: 16),
-                child: Text(
-                  "Result of $restaurantQuery",
-                  style: Theme.of(context).textTheme.headline6,
+              Visibility(
+                visible: restaurantQuery != "",
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 32, bottom: 16, left: 16, right: 16),
+                  child: Text(
+                    "Result of $restaurantQuery",
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
                 ),
               ),
               const Expanded(child: RestaurantListSearchItem())
