@@ -11,6 +11,13 @@ class HomePage extends StatelessWidget {
           backgroundColor: greyColor,
           title: const Text('GoResto'),
           titleTextStyle: Theme.of(context).textTheme.headline5,
+          actions: [
+            IconButton(onPressed: () =>
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => SearchPage()
+                ))
+            , icon: const Icon(Icons.search))
+          ],
         ),
         backgroundColor: greyColor,
         body: Column(
