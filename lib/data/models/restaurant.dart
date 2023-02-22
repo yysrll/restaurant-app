@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Restaurant {
   late String id;
   late String name;
