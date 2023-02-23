@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Text("GoResto",
                             style: Theme.of(context)
                                 .textTheme
-                                .headline6
+                                .titleLarge
                                 ?.copyWith(fontWeight: FontWeight.bold))
                       ],
                     )),
@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           RichText(
                               text: TextSpan(
                                   text: "Find Your ",
-                                  style: Theme.of(context).textTheme.headline6,
+                                  style: Theme.of(context).textTheme.titleLarge,
                                   children: const <TextSpan>[
                                 TextSpan(
                                     text: 'Restaurant ',

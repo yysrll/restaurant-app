@@ -45,11 +45,11 @@ class RestaurantTile extends StatelessWidget {
                         children: [
                           Text(
                             restaurant.name,
-                            style: Theme.of(context).textTheme.subtitle2,
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                           Text(
                             restaurant.city,
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
                       ),
@@ -65,7 +65,7 @@ class RestaurantTile extends StatelessWidget {
                           ),
                           Text(
                             restaurant.rating.toString(),
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                           )
                         ],
                       )

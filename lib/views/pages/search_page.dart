@@ -52,7 +52,7 @@ class _SearchPageState extends State<SearchPage> {
                 },
               )),
             ),
-            titleTextStyle: Theme.of(context).textTheme.headline5,
+            titleTextStyle: Theme.of(context).textTheme.headlineSmall,
           ),
           backgroundColor: greyColor,
           body: Column(
@@ -65,7 +65,7 @@ class _SearchPageState extends State<SearchPage> {
                       top: 32, bottom: 16, left: 16, right: 16),
                   child: Text(
                     "Result of $restaurantQuery",
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
               ),

@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
         conResult = result;
         isDeviceConnected = conResult == ConnectivityResult.wifi ||
             conResult == ConnectivityResult.mobile;
-        print('isDeviceConnected $isDeviceConnected');
         if (!isDeviceConnected && isAlertSet == false) {
           showDialogBox();
           setState(() {
@@ -47,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           backgroundColor: greyColor,
           title: const Text('GoResto'),
-          titleTextStyle: Theme.of(context).textTheme.headline5,
+          titleTextStyle: Theme.of(context).textTheme.headlineSmall,
           actions: [
             IconButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
@@ -64,6 +63,7 @@ class _HomePageState extends State<HomePage> {
                   top: 32, bottom: 16, left: 16, right: 16),
               child: Text(
                 "Recommendation for you!",
+                // ignore: deprecated_member_use
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),

@@ -76,7 +76,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                     children: [
                       Text(
                         state.result.name,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Text(
                         state.result.address,
@@ -131,7 +131,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                     state.result.city,
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText2
+                                        .bodyMedium
                                         ?.copyWith(fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -147,7 +147,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                     state.result.rating.toString(),
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText2
+                                        .bodyMedium
                                         ?.copyWith(fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -163,13 +163,13 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                         'Description :',
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1
+                            .bodyLarge
                             ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       RichText(
                         text: TextSpan(
                             text: firstHalf,
-                            style: Theme.of(context).textTheme.bodyText2,
+                            style: Theme.of(context).textTheme.bodyMedium,
                             children: <TextSpan>[
                               TextSpan(
                                   text: isFullDescription ? secondHalf : ''),
@@ -192,7 +192,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                         'Menus :',
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1
+                            .bodyLarge
                             ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                     ],
@@ -204,7 +204,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                     'Drinks :',
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2
+                        .bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -231,7 +231,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                     'Foods :',
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2
+                        .bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
