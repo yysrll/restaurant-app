@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant.dart';
@@ -41,6 +43,10 @@ class RestaurantSearchProvider extends ChangeNotifier {
         notifyListeners();
         return _restaurantResult = restaurants;
       }
+    } on SocketException {
+      _state = ResultState.error;
+      notifyListeners();
+      return _message = 'No Connection, please check your internet connectivity';
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
