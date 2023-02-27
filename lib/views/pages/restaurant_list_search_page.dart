@@ -12,7 +12,7 @@ class _RestaurantListSearchItemState extends State<RestaurantListSearchItem> {
   Widget build(BuildContext context) {
     return Consumer<RestaurantSearchProvider>(builder: (context, state, _) {
       if (state.state == ResultState.initial) {
-        return const Center(child: Text('Find your favorite restaurant'));
+        return const Center(child: Text('Find restaurant'));
       } else if (state.state == ResultState.loading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.state == ResultState.hasData) {

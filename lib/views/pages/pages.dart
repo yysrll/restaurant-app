@@ -13,9 +13,11 @@ import 'package:restaurant_app/provider/search_restaurant_provider.dart';
 import 'package:restaurant_app/utils/app_color.dart';
 import 'package:restaurant_app/views/widgets/widgets.dart';
 
+part 'app.dart';
 part 'splash_screen.dart';
 part 'home_page.dart';
 part 'restaurant_list_page.dart';
 part 'restaurant_list_search_page.dart';
 part 'restaurant_detail_page.dart';
 part 'search_page.dart';
+part 'favorite_page.dart';
