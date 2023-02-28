@@ -5,6 +5,23 @@ class FavoritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("favorite Page");
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding:
+              const EdgeInsets.only(top: 32, bottom: 16, left: 16, right: 16),
+          child: Text(
+            "Your favorite restaurant",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
+        Expanded(
+            child: ChangeNotifierProvider<FavoriteRestaurantProvider>(
+          create: (_) => FavoriteRestaurantProvider(),
+          child: const RestaurantListFavoriteItem(),
+        ))
+      ],
+    );
   }
 }
