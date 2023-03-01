@@ -41,11 +41,12 @@ class FavoriteRestaurantProvider extends ChangeNotifier {
     _getAllFavoriteRestaurants();
   }
 
-  Future<Restaurant> getFavoriteRestaurantById(int id) async {
-    return await _dbHelper.getFavoriteRestaurantById(id);
+  Future<bool> getFavoriteRestaurantById(String id) async {
+    var isFavorite = await _dbHelper.isFavoriteRestaurant(id);
+    return isFavorite;
   }
 
-  void deleteFavoriteRestaurant(int id) async {
+  void deleteFavoriteRestaurant(String id) async {
     await _dbHelper.deleteFavoriteRestaurant(id);
     _getAllFavoriteRestaurants();
   }

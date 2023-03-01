@@ -24,7 +24,7 @@ class DatabaseHelper {
     var db = openDatabase(join(path, 'favorite_db.db'),
         onCreate: (db, version) async {
       await db.execute('''CREATE TABLE $_tableName (
-          id INTEGER PRIMARY KEY,
+          id TEXT PRIMARY KEY,
           name TEXT,
           description TEXT,
           pictureId TEXT,
@@ -39,7 +39,6 @@ class DatabaseHelper {
   Future<void> insertFavoriteRestaurant(Restaurant restaurant) async {
     final Database db = await database;
     await db.insert(_tableName, restaurant.toJson());
-    print('data saved');
   }
 
   Future<List<Restaurant>> getFavoriteRestaurants() async {
@@ -49,7 +48,7 @@ class DatabaseHelper {
     return results.map((e) => Restaurant.fromJson(e)).toList();
   }
 
-  Future<Restaurant> getFavoriteRestaurantById(int id) async {
+  Future<bool> isFavoriteRestaurant(String id) async {
     final Database db = await database;
     List<Map<String, dynamic>> results = await db.query(
       _tableName,
@@ -57,10 +56,10 @@ class DatabaseHelper {
       whereArgs: [id],
     );
 
-    return results.map((e) => Restaurant.fromJson(e)).first;
+    return results.isNotEmpty;
   }
 
-  Future<void> deleteFavoriteRestaurant(int id) async {
+  Future<void> deleteFavoriteRestaurant(String id) async {
     final db = await database;
 
     await db.delete(

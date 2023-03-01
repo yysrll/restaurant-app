@@ -5,23 +5,28 @@ class FavoritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding:
-              const EdgeInsets.only(top: 32, bottom: 16, left: 16, right: 16),
-          child: Text(
-            "Your favorite restaurant",
-            style: Theme.of(context).textTheme.titleLarge,
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: greyColor,
+        title: const Text('GoResto'),
+        titleTextStyle: Theme.of(context).textTheme.headlineSmall,
+      ),
+      backgroundColor: greyColor,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 32, bottom: 16, left: 16, right: 16),
+            child: Text(
+              "Your favorite restaurant",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
           ),
-        ),
-        Expanded(
-            child: ChangeNotifierProvider<FavoriteRestaurantProvider>(
-          create: (_) => FavoriteRestaurantProvider(),
-          child: const RestaurantListFavoriteItem(),
-        ))
-      ],
+          const Expanded(child: RestaurantListFavoriteItem())
+        ],
+      ),
     );
   }
 }

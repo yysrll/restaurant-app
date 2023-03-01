@@ -9,7 +9,7 @@ class RestaurantTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => RestaurantDetailPage(id: restaurant.id))),
+          builder: (context) => RestaurantDetailPage(restaurant: restaurant))),
       child: Container(
           margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
           decoration: BoxDecoration(
@@ -26,7 +26,8 @@ class RestaurantTile extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
-                      'https://restaurant-api.dicoding.dev/images/small/' + restaurant.pictureId,
+                      'https://restaurant-api.dicoding.dev/images/small/' +
+                          restaurant.pictureId,
                       width: 80,
                       height: 80,
                       fit: BoxFit.cover,
