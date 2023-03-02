@@ -23,3 +23,4 @@ part 'restaurant_list_favorite_page.dart';
 part 'restaurant_detail_page.dart';
 part 'search_page.dart';
 part 'favorite_page.dart';
+part 'setting_page.dart';

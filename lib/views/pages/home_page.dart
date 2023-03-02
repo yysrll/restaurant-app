@@ -56,6 +56,10 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const FavoritePage())),
                 icon: const Icon(Icons.favorite_outline)),
+            IconButton(
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const SettingPage())),
+                icon: const Icon(Icons.settings_outlined)),
           ],
         ),
         backgroundColor: greyColor,
