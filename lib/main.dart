@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/models/restaurant.dart';
 import 'package:restaurant_app/provider/favorite_restaurant_provider.dart';
 import 'package:restaurant_app/utils/app_color.dart';
 import 'package:restaurant_app/utils/text_theme.dart';
@@ -29,7 +30,17 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           textTheme: myTextTheme,
         ),
-        home: const SplashScreen(),
+        initialRoute: SplashScreen.routeName,
+        routes: {
+          SplashScreen.routeName: (context) => const SplashScreen(),
+          HomePage.routeName: (context) => const HomePage(),
+          RestaurantDetailPage.routeName: (context) => RestaurantDetailPage(
+              restaurant:
+                  ModalRoute.of(context)?.settings.arguments as Restaurant),
+          SearchPage.routeName: (context) => const SearchPage(),
+          FavoritePage.routeName: (context) => const FavoritePage(),
+          SettingPage.routeName: (context) => const SettingPage(),
+        },
       ),
     );
   }

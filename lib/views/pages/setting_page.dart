@@ -1,6 +1,8 @@
 part of 'pages.dart';
 
 class SettingPage extends StatelessWidget {
+  static const routeName = '/setting_page';
+  
   const SettingPage({super.key});
 
   @override

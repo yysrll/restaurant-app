@@ -1,6 +1,8 @@
 part of 'pages.dart';
 
 class HomePage extends StatefulWidget {
+  static const routeName = '/home_page';
+
   const HomePage({super.key});
 
   @override
@@ -49,16 +51,13 @@ class _HomePageState extends State<HomePage> {
           titleTextStyle: Theme.of(context).textTheme.headlineSmall,
           actions: [
             IconButton(
-                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const SearchPage())),
+                onPressed: () => Navigator.pushNamed(context, SearchPage.routeName),
                 icon: const Icon(Icons.search)),
             IconButton(
-                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const FavoritePage())),
+                onPressed: () => Navigator.pushNamed(context, FavoritePage.routeName),
                 icon: const Icon(Icons.favorite_outline)),
             IconButton(
-                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const SettingPage())),
+                onPressed: () => Navigator.pushNamed(context, SettingPage.routeName),
                 icon: const Icon(Icons.settings_outlined)),
           ],
         ),

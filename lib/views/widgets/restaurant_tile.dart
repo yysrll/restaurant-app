@@ -8,8 +8,8 @@ class RestaurantTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => RestaurantDetailPage(restaurant: restaurant))),
+      onTap: () => Navigator.pushNamed(context, RestaurantDetailPage.routeName,
+          arguments: restaurant),
       child: Container(
           margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
           decoration: BoxDecoration(

@@ -1,6 +1,8 @@
 part of 'pages.dart';
 
 class FavoritePage extends StatelessWidget {
+  static const routeName = '/favorite_page';
+  
   const FavoritePage({super.key});
 
   @override
