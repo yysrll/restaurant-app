@@ -2,7 +2,7 @@ part of 'pages.dart';
 
 class SettingPage extends StatelessWidget {
   static const routeName = '/setting_page';
-  
+
   const SettingPage({super.key});
 
   @override
@@ -21,11 +21,16 @@ class SettingPage extends StatelessWidget {
             child: ListTile(
               title: const Text("Daily Reminder"),
               subtitle: const Text("Show notification at 11.00 am everyday"),
-              trailing: Switch.adaptive(
-                  value: false,
-                  onChanged: (newValue) {
-                    print("switch change to $newValue");
-                  }),
+              trailing: Consumer<SchedulingProvider>(
+                builder: (context, scheduled, _) {
+                  return Switch.adaptive(
+                      value: scheduled.isScheduled,
+                      onChanged: (newValue) {
+                        print("switch change to $newValue");
+                        scheduled.scheduledRestaurant(newValue);
+                      });
+                },
+              ),
             ),
           )
         ],

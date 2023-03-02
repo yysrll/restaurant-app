@@ -15,10 +15,14 @@ class _HomePageState extends State<HomePage> {
   var isDeviceConnected = false;
   bool isAlertSet = false;
 
+  final NotificationHelper _notificationHelper = NotificationHelper();
+
   @override
   void initState() {
     getConnectivity();
     super.initState();
+    _notificationHelper
+        .configureSelectNotificationSubject(RestaurantDetailPage.routeName);
   }
 
   getConnectivity() => subscription = Connectivity()
@@ -38,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     subscription.cancel();
+    selectNotificationSubject.close();
     super.dispose();
   }
 
@@ -51,13 +56,16 @@ class _HomePageState extends State<HomePage> {
           titleTextStyle: Theme.of(context).textTheme.headlineSmall,
           actions: [
             IconButton(
-                onPressed: () => Navigator.pushNamed(context, SearchPage.routeName),
+                onPressed: () =>
+                    Navigator.pushNamed(context, SearchPage.routeName),
                 icon: const Icon(Icons.search)),
             IconButton(
-                onPressed: () => Navigator.pushNamed(context, FavoritePage.routeName),
+                onPressed: () =>
+                    Navigator.pushNamed(context, FavoritePage.routeName),
                 icon: const Icon(Icons.favorite_outline)),
             IconButton(
-                onPressed: () => Navigator.pushNamed(context, SettingPage.routeName),
+                onPressed: () =>
+                    Navigator.pushNamed(context, SettingPage.routeName),
                 icon: const Icon(Icons.settings_outlined)),
           ],
         ),

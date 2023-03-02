@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:restaurant_app/data/models/restaurant.dart';
 import 'package:http/http.dart' as http;
@@ -17,6 +18,17 @@ class ApiService {
           .map((e) => Restaurant.fromJson(e))
           .toList();
     } else {
+      throw Exception('Failed to load resturant, try again!');
+    }
+  }
+
+  Future<Restaurant> getRandomRestaurant() async {
+    try {
+      var restaurants = await getRestaurants();
+      var randomIndex = Random().nextInt(restaurants.length);
+      var randomRestaurant = restaurants.elementAt(randomIndex);
+      return randomRestaurant;
+    } catch (e) {
       throw Exception('Failed to load resturant, try again!');
     }
   }

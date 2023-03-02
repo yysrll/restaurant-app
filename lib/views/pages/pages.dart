@@ -11,8 +11,10 @@ import 'package:restaurant_app/provider/enum_result_state.dart';
 import 'package:restaurant_app/provider/favorite_restaurant_provider.dart';
 import 'package:restaurant_app/provider/restaurant_detail_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/provider/scheduling_provider.dart';
 import 'package:restaurant_app/provider/search_restaurant_provider.dart';
 import 'package:restaurant_app/utils/app_color.dart';
+import 'package:restaurant_app/utils/notification_helper.dart';
 import 'package:restaurant_app/views/widgets/widgets.dart';
 
 part 'splash_screen.dart';
