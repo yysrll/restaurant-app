@@ -1,7 +1,9 @@
 part of 'pages.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  static const routeName = '/home_page';
+
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -13,10 +15,14 @@ class _HomePageState extends State<HomePage> {
   var isDeviceConnected = false;
   bool isAlertSet = false;
 
+  final NotificationHelper _notificationHelper = NotificationHelper();
+
   @override
   void initState() {
     getConnectivity();
     super.initState();
+    _notificationHelper
+        .configureSelectNotificationSubject(RestaurantDetailPage.routeName);
   }
 
   getConnectivity() => subscription = Connectivity()
@@ -36,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     subscription.cancel();
+    selectNotificationSubject.close();
     super.dispose();
   }
 
@@ -49,9 +56,17 @@ class _HomePageState extends State<HomePage> {
           titleTextStyle: Theme.of(context).textTheme.headlineSmall,
           actions: [
             IconButton(
-                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const SearchPage())),
-                icon: const Icon(Icons.search))
+                onPressed: () =>
+                    Navigator.pushNamed(context, SearchPage.routeName),
+                icon: const Icon(Icons.search)),
+            IconButton(
+                onPressed: () =>
+                    Navigator.pushNamed(context, FavoritePage.routeName),
+                icon: const Icon(Icons.favorite_outline)),
+            IconButton(
+                onPressed: () =>
+                    Navigator.pushNamed(context, SettingPage.routeName),
+                icon: const Icon(Icons.settings_outlined)),
           ],
         ),
         backgroundColor: greyColor,
@@ -63,8 +78,7 @@ class _HomePageState extends State<HomePage> {
                   top: 32, bottom: 16, left: 16, right: 16),
               child: Text(
                 "Recommendation for you!",
-                // ignore: deprecated_member_use
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
             Expanded(

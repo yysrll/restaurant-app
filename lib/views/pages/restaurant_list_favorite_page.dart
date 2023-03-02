@@ -1,19 +1,17 @@
 part of 'pages.dart';
 
-class RestaurantListSearchItem extends StatefulWidget {
-  const RestaurantListSearchItem({Key? key}) : super(key: key);
+class RestaurantListFavoriteItem extends StatefulWidget {
+  const RestaurantListFavoriteItem({Key? key}) : super(key: key);
 
   @override
-  State<RestaurantListSearchItem> createState() => _RestaurantListSearchItemState();
+  State<RestaurantListFavoriteItem> createState() => _RestaurantListFavoriteItemState();
 }
 
-class _RestaurantListSearchItemState extends State<RestaurantListSearchItem> {
+class _RestaurantListFavoriteItemState extends State<RestaurantListFavoriteItem> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<RestaurantSearchProvider>(builder: (context, state, _) {
-      if (state.state == ResultState.initial) {
-        return const Center(child: Text('Find restaurant'));
-      } else if (state.state == ResultState.loading) {
+    return Consumer<FavoriteRestaurantProvider>(builder: (context, state, _) {
+      if (state.state == ResultState.loading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.state == ResultState.hasData) {
         return ListView.builder(

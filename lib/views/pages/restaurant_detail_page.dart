@@ -1,9 +1,12 @@
 part of 'pages.dart';
 
 class RestaurantDetailPage extends StatefulWidget {
-  const RestaurantDetailPage({Key? key, required this.id}) : super(key: key);
+  static const routeName = '/detail_page';
+  
+  const RestaurantDetailPage({Key? key, required this.restaurant})
+      : super(key: key);
 
-  final String id;
+  final Restaurant restaurant;
 
   @override
   State<RestaurantDetailPage> createState() => _RestaurantDetailPageState();
@@ -13,10 +16,19 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
   bool isFullDescription = false;
   late String firstHalf;
   late String secondHalf;
+  bool isFavorite = false;
 
   @override
   void initState() {
+    setFavoriteStatus();
     super.initState();
+  }
+
+  void setFavoriteStatus() async {
+    isFavorite =
+        await Provider.of<FavoriteRestaurantProvider>(context, listen: false)
+            .getFavoriteRestaurantById(widget.restaurant.id);
+    setState(() {});
   }
 
   void _setDescription(String description) {
@@ -32,14 +44,33 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) =>
-            RestaurantDetailProvider(apiService: ApiService(), id: widget.id),
+        create: (_) => RestaurantDetailProvider(
+            apiService: ApiService(), id: widget.restaurant.id),
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
             backgroundColor: greyColor,
           ),
           backgroundColor: greyColor,
+          floatingActionButton: FloatingActionButton(
+            elevation: 4,
+            child: Icon(isFavorite ? Icons.favorite : Icons.favorite_outline),
+            onPressed: () async {
+              var provider = Provider.of<FavoriteRestaurantProvider>(context,
+                  listen: false);
+
+              if (isFavorite) {
+                provider.deleteFavoriteRestaurant(widget.restaurant.id);
+              } else {
+                await provider.addFavoriteRestaurant(widget.restaurant);
+              }
+
+              if (provider.state != ResultState.error) {
+                isFavorite = !isFavorite;
+              }
+              setState(() {});
+            },
+          ),
           body: _getDetail(context),
         ));
   }
@@ -100,7 +131,10 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                   padding: const EdgeInsets.all(4),
                                   child: Text(
                                     state.result.categories[index].name,
-                                    style: Theme.of(context).textTheme.labelMedium?.copyWith(color: successColor),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(color: successColor),
                                   ),
                                 ),
                               );
@@ -249,6 +283,9 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                             backgroundColor: successTransparentColor);
                       }),
                 ),
+                const SizedBox(
+                  height: 100,
+                )
               ],
             ),
           ],
