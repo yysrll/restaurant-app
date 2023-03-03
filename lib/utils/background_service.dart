@@ -23,7 +23,6 @@ class BackgroundService {
   }
 
   static Future<void> callback() async {
-    print('alarm fired');
     final NotificationHelper notificationHelper = NotificationHelper();
     var result = await ApiService().getRandomRestaurant();
     await notificationHelper.showNotification(

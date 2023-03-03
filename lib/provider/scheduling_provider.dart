@@ -24,7 +24,6 @@ class SchedulingProvider extends ChangeNotifier {
     prefs.setBool(isScheduledKey, value);
     _isScheduled = value;
     if (_isScheduled) {
-      print("Scheduling restaurant activated");
       notifyListeners();
       return await AndroidAlarmManager.periodic(
         const Duration(hours: 24),
@@ -35,7 +34,6 @@ class SchedulingProvider extends ChangeNotifier {
         wakeup: true,
       );
     } else {
-      print('Scheduling News Canceled');
       notifyListeners();
       return await AndroidAlarmManager.cancel(1);
     }

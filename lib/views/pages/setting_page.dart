@@ -26,7 +26,6 @@ class SettingPage extends StatelessWidget {
                   return Switch.adaptive(
                       value: scheduled.isScheduled,
                       onChanged: (newValue) {
-                        print("switch change to $newValue");
                         scheduled.scheduledRestaurant(newValue);
                       });
                 },
